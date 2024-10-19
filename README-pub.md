@@ -22,7 +22,7 @@
 
 1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically)
 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques)
-3. (Coming soon) Introduction to Tool Calling
+3. [Introduction to Tool Calling](./03-intro-to-tool-calling)
 4. (Coming soon) Building an Agentic Tool-Calling Loop from Scratch + Self-Optimizing Agents
 5. (Coming soon) Sketching Multi-Agent Architectures
 6. (Coming soon) Chain of Thought and other Intermediate Prompt Engineering Techniques

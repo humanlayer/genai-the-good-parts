@@ -283,7 +283,11 @@ print('-----Assistant-----\n', messages[-1].content)
 
 while True:
     print("\n------User------\n")
-    user_input = input()
+    try:
+        user_input = input()
+    except EOFError: # allow the user to exit with ctrl-d
+        print("\n------EOF------\n")
+        break
 
 
     # now, let's add a user message to the chain as well
@@ -487,19 +491,21 @@ Now, with in-context learning, we can send to the LLM:
 
 ## Assignment
 
-Pick one of your favorite social media or blog content creators, and write a few-shot prompt that teaches the LLM to mimic their style, and produces a new post that matches the style.
+Pick one of your favorite social media or blog content creators, and write a few-shot prompt/script that teaches the LLM to mimic their style, and produces a new post that matches the style.
 
 ## Next Steps
 
-From here, you're ready to start learning about (Coming soon) Function and Tool Calling.
+From here, you're ready to start learning about [Function and Tool Calling](../03-intro-to-tool-calling/README.md).
 
-## Aside - Instruct Tuning and PromptML
+## Aside - Instruct Tuning and ChatML
 
-Understanding the evolution of language models helps in crafting more effective prompts.
+Understanding the evolution of language models helps in crafting more effective prompts. 
 
 ### Early vs. Instruct-Tuned Models
 - Early models: Designed for simple text completion, requiring creative prompting for specific tasks.
 - Instruct-tuned models (circa 2021-2022): Fine-tuned to understand and follow explicit instructions.
+
+See [Chapter-XX Taking the Rails off: Raw Completions APIs](../xx-taking-the-rails-off/README.md) for a deep dive into non-chat interfaces to LLMs.
 
 ### Instruct Tuning Mechanics
 - Uses special tokens to delineate parts of the input (instruction, context, output format).
