@@ -5,7 +5,7 @@
 
 If you're here, you've been invited to review early versions of chapters for GenAI the good parts.
 
-(the main readme is now in [README-pub.md](./README-pub.md)
+(the main readme is now in [README-pub.md](./README-pub.md))
 
 ### How it works
 
