@@ -1,5 +1,7 @@
 # Interacting with Language Models Programatically
 
+⚙️  Status: Beta
+
 ## Overview
 
 In this chapter, we'll explore how to interact with language models programmatically using a Python client. This will lay the foundation for the rest of the GenAI engineering topics in the book.
@@ -88,7 +90,6 @@ Let's update the script to stream the response. Notice we changed to prompt to a
 
 ```python
 from openai import OpenAI
-import sys
 
 client = OpenAI()
 
@@ -105,8 +106,7 @@ stream = client.chat.completions.create(
 )
 for chunk in stream:
     if chunk.choices[0].delta.content is not None:
-        sys.stdout.write(chunk.choices[0].delta.content)
-        sys.stdout.flush()
+        print(chunk.choices[0].delta.content, end="", flush=True)
 ```
 
 When running this, you should see the output appear progressively, a few tokens at a time.
@@ -126,17 +126,15 @@ client = AsyncOpenAI()
 
 async def main():
     response = await client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": "Write a haiku about recursion in programming."
-                }
-            ],
-            temperature=0.0,
-            tool_choice=None
-        )
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": "Write a haiku about recursion in programming."
+            }
+        ],
+    )
 
     print(response.choices[0].message.content)
 

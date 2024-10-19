@@ -5,17 +5,15 @@ client = AsyncOpenAI()
 
 async def main():
     response = await client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": "Write a haiku about recursion in programming."
-                }
-            ],
-            temperature=0.0,
-            tool_choice=None
-        )
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": "Write a haiku about recursion in programming."
+            }
+        ],
+    )
 
     print(response.choices[0].message.content)
 
