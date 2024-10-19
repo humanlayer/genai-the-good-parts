@@ -21,7 +21,7 @@
 ## Table of contents
 
 1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically)
-2. (Coming soon) AI Messaging and Basic Prompt Engineering
+2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques)
 3. (Coming soon) Introduction to Tool Calling
 4. (Coming soon) Building an Agentic Tool-Calling Loop from Scratch + Self-Optimizing Agents
 5. (Coming soon) Sketching Multi-Agent Architectures
