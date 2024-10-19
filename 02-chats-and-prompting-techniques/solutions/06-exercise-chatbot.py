@@ -13,14 +13,13 @@ print(messages[0]["content"])
 
 while True:
     print("\n------User------\n")
-    user_input = input()
-
+    try:
+        user_input = input()
+    except EOFError:
+        break
 
     # now, let's add a user message to the chain as well
-    messages.append({
-        "role": "user",
-        "content": user_input
-    })
+    messages.append({"role": "user", "content": user_input})
 
     completion = client.chat.completions.create(
         model="gpt-4o",
@@ -29,4 +28,4 @@ while True:
 
     messages.append(completion.choices[0].message)
 
-    print('\n-----Assistant-----\n', messages[-1].content)
+    print("\n-----Assistant-----\n", messages[-1].content)

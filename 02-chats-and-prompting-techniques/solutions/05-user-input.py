@@ -26,7 +26,10 @@ print('-----Assistant-----\n', messages[-1].content)
 
 while True:
     print("\n------User------\n")
-    user_input = input()
+    try:
+        user_input = input()
+    except EOFError:
+        break
 
 
     # now, let's add a user message to the chain as well
