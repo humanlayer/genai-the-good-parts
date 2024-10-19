@@ -18,6 +18,7 @@ They will also be posted to https://genaibook.substack.com/, feel free to drop a
 ### How to contribute
 
 - Read the chapters, run the code in the examples, try to do the exercises
+- Give feedback in the Discord Channel: https://discord.gg/4DVgayVa8j
 - Open issues for problems or suggestions
 - Contribute new content - sections or even whole chapters. Start with an issue and let's discuss!
 - Refer a Friend - you can intro us on linkedin or via email at dexter@humanlayer.dev
