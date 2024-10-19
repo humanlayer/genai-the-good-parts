@@ -7,7 +7,7 @@ If you're here, you've been invited to review early versions of chapters for Gen
 
 (the main readme is now in [README-pub.md](./README-pub.md))
 
-### How it works
+### How this private repo works
 
 All chapters will be published here - they'll get an Alpha / Beta / GA tag so you know what level of quality to expect.
 
