@@ -452,7 +452,7 @@ messages = [
     # {"role": "user", "content": "What is the best book from 2012?"},
     # {"role": "assistant", "content": f"The best book from 2012 is {obsession}."},
     # {"role": "user", "content": "What is the best thing from 2009?"},
-    {"role": "assistant", "content": f"The best thing from 2009 is {obsession}."},
+    #{"role": "assistant", "content": f"The best thing from 2009 is {obsession}."},
     {"role": "user", "content": "What is the best song from 2019?"},
 ]
 ```
