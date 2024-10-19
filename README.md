@@ -5,6 +5,8 @@
 
 If you're here, you've been invited to review early versions of chapters for GenAI the good parts.
 
+(the main readme is now in [README-pub.md](./README-pub.md)
+
 ### How it works
 
 All chapters will be published here - they'll get an Alpha / Beta / GA tag so you know what level of quality to expect.
