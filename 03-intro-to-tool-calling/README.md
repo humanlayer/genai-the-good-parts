@@ -1,6 +1,6 @@
 # Introduction to Tool Calling
 
-**Status**: 🚧 Work in Progress
+**Status**: 🛠️ Alpha
 
 ## Overview
 
@@ -542,71 +542,63 @@ Rewrite the delivery date script to use this technique to automatically generate
 
 Verify that changing the docstring or function arguments automatically passes through to the LLM. (For example, add a new `order_type: str` parameter that can be one of "clothing", "electronics", "household", etc.)
 
-## Compound tool calls and the agentic loop
+## Next Steps - complete the agentic loop
 
-That's great if we know our tracking info, but what if the user just says the item name?
+We're very close to developing one of the core concepts in AI agents: the agentic loop. Head to [Chapter 4: Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratch) to go deep
 
-```python
-def search_orders(user_email: str, item_name: str) -> str:
-    ...
+## Aside; JSON is all you need
+
+Especially in the early days of tool calling, the use case we explored above was actually *not* the most common.
+
+Yes, tool calling is a way for LLMs to interact with traditional deterministic software, but more generally, the thing that makes tool calling special is that it allows you to give the LLM access to any function that you can describe in JSON.
+
+Essentially, what folks quickly realized is that they could use tool calling to get the LLM to generate *any* json payload, not just a json payload that indicates a function call. That means you could use tool calling to get an LLM to turn unstructured text into structured json.
+
+In our work, we translated things like "what's the status of order 1234567890?" into 
+
+```json
+{
+    "tool_calls": [
+        {
+            "id": "call_1234567890",
+            "function": {
+                "name": "get_order_status",
+                "arguments": "{\"order_id\": \"1234567890\"}"
+            }
+        }
+    ]
+}
 ```
 
-IN this case, let's embed the user email in the system prompt, since
-that wont change throughout the interaction. 
+but we could just have easily have had the model return something like
 
-```python
-system_prompt = """
-you are a helpful assistant
-"""
-
-system_prompt += """
-the user your are assisting is: tom@acme-industries.com
-"""
+```json
+{
+    "order_status_request": {
+        "order_id": "1234567890"
+    }
+}
 ```
 
+and handed that off to a program to do something with, maybe never even sending a result back to an LLM.
 
-## Prompt Engineering, Closures and Injection for Determinism
+Another common use case for this is classification, e.g. turning
 
-In the previous case, the above example isn't quite safe enough to ship to users.
+```
+"I want to buy a blue shirt"
+```
 
-Sure, with no input 
+into
 
-### Getting the model to query email for another user
+```json
+{
+    "has_buying_intent": true,
+    "category": "clothing"
+}
+```
 
+If you're familair with Lisp's "code is data and data is code" philosophy, this should all feel somewhat familiar.
 
-### Guarding with prompting
+**Going deeper:**
 
-
-
-### Exercise: even given our super-safe system prompt, try to write a prompt that gets the model to call the function with the wrong email
-
-<details>
-<summary>Hint</summary>
-Here's some inspiration if you get stuck https://x.com/leastfavorite_/status/1570475633557348355/photo/2
-</details>
-
-Try a few different models and see how different approaches work on different models. You can use other models in the GPT / O1 family, or explore claude, mistral, or llama.
-
-### Guarding deterministically with closures
-
-As we saw above, we probably shouldn't rely on 
-
-### Injecting other secure parameters
-
-We just covered "guardrails" that ensure a model can't leak data by accidentally calling a tool with incorrect parameters.
-
-But there's another class of security concern here - what if our function needs access to secure information, like a 
-
-Dependency injection and access is a rich topic with many potential architectures depending on your needs and your broader application structure. This is just one example of how you might. 
-
-## Putting it all together
-
-
-
-## JSON is all you need
-
-One of the earliest use cases of tool calling / function calling
-
-
-BFCL 
-
+- [The Berkeley Function Calling Leaderboard](https://gorilla.cs.berkeley.edu/leaderboard.html) tracks model perfomance on function calling tasks, many of which more like "structured output" tasks than the kind of tool calling we've been discussing.
