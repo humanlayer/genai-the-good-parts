@@ -22,20 +22,21 @@
 
 1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically)
 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques)
-3. (Coming soon) Introduction to Tool Calling
-4. (Coming soon) Building an Agentic Tool-Calling Loop from Scratch + Self-Optimizing Agents
-5. (Coming soon) Sketching Multi-Agent Architectures
-6. (Coming soon) Chain of Thought and other Intermediate Prompt Engineering Techniques
-7. (Coming soon) Retrieval Augmented Generation (RAG)
-8. (Coming soon) Outer-Loop Agents
+3. [Introduction to Tool Calling](./03-intro-to-tool-calling)
+4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratch)
+5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity)
+6. (Coming soon) Multi-Agent Architectures
+7. (Coming soon) Chain of Thought and other Intermediate Prompt Engineering Techniques
+8. (Coming soon) Retrieval Augmented Generation (RAG)
+9. (Coming soon) Outer-Loop Agents
 
 ## Reccomended Pre-Requisites
 
 This course will assume you have some background in:
 
 1. Basic CLI use and managing projects with git
-2. Getting, writing, editing, and running python programs
-3. Basic background on machine learning and vector embeddings. [There is an excellent free course on this here](https://www.youtube.com/playlist?list=plzhqobowtqdnu6r1_67000dx_zcjb-3pi) 
+2. Getting, writing, editing, and running python programs and dependencies
+3. For chapters on Retrieval Augmented Generation (5 and 6) you'll want a Basic background on machine learning and vector embeddings. [There is an excellent free course on this here](https://www.youtube.com/playlist?list=plzhqobowtqdnu6r1_67000dx_zcjb-3pi) 
 4. Interacting with REST APIs and Databases (but no API or Database in particular)
 5. Basic familiarity with LLMs, having played with ChatGPT a bit is plenty
 
