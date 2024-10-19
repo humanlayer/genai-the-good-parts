@@ -20,17 +20,18 @@
 
 ## Table of contents
 
-1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically)
-2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques)
-3. [Introduction to Tool Calling](./03-intro-to-tool-calling)
-4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratch)
-5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity)
-6. (Coming soon) Multi-Agent Architectures
-7. (Coming soon) Chain of Thought and other Intermediate Prompt Engineering Techniques
-8. (Coming soon) Retrieval Augmented Generation (RAG)
-9. (Coming soon) Outer-Loop Agents
+| Chapter | Status |
+|---------|--------|
+| 1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically) | ⚙️ Beta |
+| 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques) | ⚙️ Beta |
+| 3. [Introduction to Tool Calling](./03-intro-to-tool-calling) | 🛠️ Alpha |
+| 4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratch) | 💭 Outline |
+| 5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity) | 💭 Outline |
+| 6. Multi-Agent Architectures | Coming soon |
+| 7. Chain of Thought and other Intermediate Prompt Engineering Techniques | Coming soon |
+| 8. Retrieval Augmented Generation (RAG) | Coming soon |
+| 9. Outer-Loop Agents | Coming soon |
 
-## Reccomended Pre-Requisites
 
 This course will assume you have some background in:
 
