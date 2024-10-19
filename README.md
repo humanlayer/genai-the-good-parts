@@ -20,7 +20,10 @@ They will also be posted to https://genaibook.substack.com/, feel free to drop a
 - Read the chapters, run the code in the examples, try to do the exercises
 - Open issues for problems or suggestions
 - Contribute new content - sections or even whole chapters. Start with an issue and let's discuss!
-- Tell your friends! [social post examples](#social-post-examples)
+- Refer a Friend - you can intro us on linkedin or via email at dexter@humanlayer.dev
+
+<!-- soon 
+- Soon Tell your friends! [social post examples](#social-post-examples)
 
 
 ### Social post examples
@@ -30,3 +33,5 @@ and it was sick...super clear and concise no-bs guide to getting
 productive quickly https://genaibook.substack.com/
 
 (PS, want early access to the newest content? Leave a comment)
+
+-->
