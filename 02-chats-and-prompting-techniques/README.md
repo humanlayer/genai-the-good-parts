@@ -1,5 +1,7 @@
 # Chat interfaces and Few-Shot Prompting
 
+🛠️ Status: Alpha
+
 ## Overview
 
 In this chapter, we'll go deeper on the structure of how LLM APIs process messages and longer chats.

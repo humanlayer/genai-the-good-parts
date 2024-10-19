@@ -1,5 +1,7 @@
 # Interacting with Language Models Programatically
 
+⚙️  Status: Beta
+
 ## Overview
 
 In this chapter, we'll explore how to interact with language models programmatically using a Python client. This will lay the foundation for the rest of the GenAI engineering topics in the book.
