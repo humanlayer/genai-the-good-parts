@@ -13,15 +13,20 @@ All chapters will be published here - they'll get an Alpha / Beta / GA tag so yo
 
 As chapters reach GA, they will be copied to a public version of this repo at some regular cadence.
 
+They will also be posted to https://genaibook.substack.com/, feel free to drop a subscribe there as well!
+
 ### How to contribute
 
-- Read the examples, run the code
+- Read the chapters, run the code in the examples, try to do the exercises
 - Open issues for problems or suggestions
-- Contribute new content - sections or even whole chapters. Start with an issue let's discuss!
+- Contribute new content - sections or even whole chapters. Start with an issue and let's discuss!
 - Tell your friends! [social post examples](#social-post-examples)
 
 
 ### Social post examples
 
+Wow I just went through the first three chapters of GenAI the good parts
+and it was sick...super clear and concise no-bs guide to getting
+productive quickly https://genaibook.substack.com/
 
-(PS, want early access to the newest content? do $CALL_TO_ACTION)
+(PS, want early access to the newest content? Leave a comment)
