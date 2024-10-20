@@ -228,9 +228,59 @@ In order to process this response from the LLM, we need to take the following st
 
 Let's modify our `run_conversation` function to call the function and append the result to the conversation, and to only print output to the console when the LLM returns a plaintext (non-function-call) response.
 
+Full code for this section can be found in [solutions/02-calling-the-function.py](solutions/02-calling-the-function.py)
+
 ```python
 # new import for outputting messages
 import json
+
+def run_conversation():
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": "What is the estimated delivery date for package 8675309?",
+        },
+    ]
+
+    print("------MESSAGES BEFORE LLM CALL-----")
+    print(json.dumps(messages, indent=2))
+
+    resp = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        tools=openai_functions,
+    )
+    # append the response message to the conversation
+    messages.append(resp.choices[0].message.model_dump())
+    print("------MESSAGES AFTER LLM CALL-----")
+    print(json.dumps(messages, indent=2))
+
+    if resp.choices[0].message.tool_calls:
+        # assume there's only one tool call per message for now
+        tool_call = resp.choices[0].message.tool_calls[0]
+
+        if tool_call.function.name == "get_estimated_delivery_date":
+            args = json.loads(tool_call.function.arguments)
+            delivery_date = get_estimated_delivery_date(args["tracking_number"])
+
+            # need to ensure function responses are json-serializable, which
+            # means we can't just return a datetime object
+            serialized_date = delivery_date.isoformat()
+
+            # append the function response to the conversation
+            messages.append(
+                {
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "content": serialized_date,
+                }
+            )
+        else:
+            raise ValueError(f"Unknown tool call: {tool_call.function.name}")
+
+    print("------MESSAGES AFTER TOOL EXECUTION-----")
+    print(json.dumps(messages, indent=2))
 ```
 
 You should see the following progression of the conversation thread:
@@ -287,7 +337,7 @@ Now that we have our tool call response in the thread, we can send the whole con
 
 After processing the tool call, let's send the full chain of messages back to the LLM:
 
-(as a reminder, at this point, the message chain is)
+As a reminder, at this point, the message chain is:
 
 ```json
 [
@@ -296,8 +346,12 @@ After processing the tool call, let's send the full chain of messages back to th
     {"role": "assistant", "tool_calls": ["..."], "content": null},
     {"role": "tool", "tool_call_id": "...", "content": "..."}
 ]
+```
+
 
 ```python
+# we just added the tool call response to the end of the chain
+
 resp = client.chat.completions.create(
     model="gpt-4o",
     messages=messages,
@@ -534,6 +588,31 @@ def get_estimated_delivery_date(order_id: str) -> str:
 import json
 print(json.dumps(function_to_schema(get_estimated_delivery_date), indent=2))
 ```
+
+You should see something familiar:
+
+```json
+{
+  "type": "function",
+  "function": {
+    "name": "get_estimated_delivery_date",
+    "description": "get the estimated delivery date for a package",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "tracking_number": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tracking_number"
+      ]
+    }
+  }
+```
+
+Code for this example can be found in [solutions/06-generating-schema.py](solutions/06-generating-schema.py)
+
 
 
 ## Exercise - automatically generate the function schema
