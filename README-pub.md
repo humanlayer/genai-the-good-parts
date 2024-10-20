@@ -22,10 +22,10 @@
 
 | Chapter | Status |
 |---------|--------|
-| 1. [Interacting with Language Models Programatically](./01-interating-with-language-models-programatically) | ⚙️ Beta |
+| 1. [Interacting with Language Models Programatically](.01-interacting-with-language-models-programatically) | ⚙️ Beta |
 | 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques) | ⚙️ Beta |
 | 3. [Introduction to Tool Calling](./03-intro-to-tool-calling) | 🛠️ Alpha |
-| 4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratch) | 💭 Outline |
+| 4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratc) | 💭 Outline |
 | 5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity) | 💭 Outline |
 | 6. Multi-Agent Architectures | Coming soon |
 | 7. Chain of Thought and other Intermediate Prompt Engineering Techniques | Coming soon |
@@ -107,5 +107,6 @@ This content is designed for MacOS or Linux and tested on MacOS. If someone want
 Non-code content is licensed under the [Creative Commons Attribution-NonCommercial (CC BY-NC)](https://creativecommons.org/licenses/by-nc/4.0/). If you'd like to use the content for commercial purposes like paid courses, please contact us at contact@humanlayer.dev and let's chat.
 
 The Code examples in this repo are licensed under the [MIT license](./LICENSE)
+
 
 
