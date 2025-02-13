@@ -36,30 +36,31 @@ This course will assume you have some background in:
 
 1. Basic CLI use and managing projects with git
 2. Getting, writing, editing, and running python programs and dependencies
-3. For chapters on Retrieval Augmented Generation (5 and 6) you'll want a Basic background on machine learning and vector embeddings. [There is an excellent free course on this here](https://www.youtube.com/playlist?list=plzhqobowtqdnu6r1_67000dx_zcjb-3pi)
-4. Interacting with REST APIs and Databases (but no API or Database in particular)
+3. For chapters on Retrieval Augmented Generation (RAG, Chapters 5 and 6) you'll want a basic background on machine learning and vector embeddings. [There is an excellent free course on this here.](https://www.youtube.com/playlist?list=plzhqobowtqdnu6r1_67000dx_zcjb-3pi)
+4. Interacting with REST APIs and databases (but no API or database in particular)
 5. Basic familiarity with LLMs, having played with ChatGPT a bit is plenty
 
 You do not need:
 
-1. Academic background in AI or Machine Learning, beyond what is linked in #3 above
-2. Access to GPUs for training / fine tuning
+1. An academic background in AI or Machine Learning, beyond what is linked in #3 above
+2. Access to GPUs for training/fine-tuning
 
 ## What You'll Learn
 
 This course will touch on a few different topics, with the goal of giving you a general overview of what is possible. We won't go especially
-deep on any one topic. You will get sense of what is possible and how to go deeper on what that interests you.
+deep on any one topic. You will get sense of what is possible and how to go deeper on what interests you.
+
+You'll learn:
 
 1. How to interact with LLMs Programatically using python
 2. How to improve performance with some basic prompt engineering techniques
 3. How to expose LLMs to the outside world with Tool/Function Calling
 4. Techniques to build multi-agent systems to improve results and perform more complex tasks
-5. Advanced prompt engineering topics like chain of thought
-6. Using RAG to equip LLMS with contextual knowledge
-7. Building outer-loop agents that work in the background (rather than in chat interfaces)
+5. Advanced prompt engineering topics like chain-of-thought
+6. To use RAG to equip LLMS with contextual knowledge
+7. To build outer-loop agents that work in the background (rather than in chat interfaces)
 
-By the end of the course, you'll have built several complex LLM applications, and should feel confident to
-build LLM-based agents for your own or your customers' use cases. You'll be equipped to design AI-native solutions and weigh the tradeoffs between different approaches and frameworks.
+By the end of this course, you'll have built several complex LLM applications, and should feel confident to build LLM-based agents for your own or your customers' use cases. You'll be equipped to design AI-native solutions and weigh the tradeoffs between different approaches and frameworks.
 
 ## FAQ
 
@@ -71,7 +72,7 @@ I found myself stumbling into a few of these topics, many of which have been aro
 2. Frameworks that orchestrate LLM applications tend to overindex on "look at all this magic" and add a lot of complexity for simple use cases. A lot of that magic is wrapped up in some very good but very opaque prompt engineering.
 3. As I found myself explaining the basics of function calling to AI skeptics, I realized that a lot of great engineers have been underserved by the AI hype machine.
 
-**GenAI The Good Parts** is my attempt to cut through the noise and focus on the core concepts that are foundational to building awesome LLM applications.
+**GenAI, The Good Parts** is my attempt to cut through the noise and focus on the core concepts that are foundational to building awesome LLM applications.
 
 ### Who is this for?
 
@@ -87,7 +88,7 @@ Nowadays you can write agents in many languages, but python is by far the most p
 
 ### How long does this take to complete?
 
-Each chapter is design to take ~1 hour to complete, and each will include a hands-on coding assignment. Some of these will take 20 minutes, others might run several hours.
+Each chapter is designed to take ~1 hour to complete, and each will include a hands-on coding assignment. Some of these will take 20 minutes, others might run several hours.
 
 ### What if I get stuck?
 
@@ -97,7 +98,7 @@ HumanLayer has a [Discord community](https://discord.gg/AK6bWGFY7d), which is an
 
 ### Can I do this on Windows?
 
-This content is designed for MacOS or Linux and tested on MacOS. If someone wants to contribute content/instructions for Windows, I'd be very happy to include it.
+This content is designed for MacOS or Linux and tested on MacOS. If someone wants to contribute content/instructions for Windows, we'd be happy to include it.
 
 ## License
 
