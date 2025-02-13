@@ -22,7 +22,7 @@ They will also be posted to https://genaibook.substack.com/. Feel free to drop a
 - Contribute new content, sections or even whole chapters. Start with an issue and let's discuss!
 - Refer a Friend - you can intro us on LinkedIn or via email at [dexter@humanlayer.dev](mailto:dexter@humanlayer.dev).
 
-### Table of Contents
+### Table of Contents - intro: GenAI, The Good Parts
 
 | Chapter                                                                                                         | Status      |
 | --------------------------------------------------------------------------------------------------------------- | ----------- |
@@ -35,6 +35,14 @@ They will also be posted to https://genaibook.substack.com/. Feel free to drop a
 | 7. Chain of Thought and other Intermediate Prompt Engineering Techniques                                        | Coming soon |
 | 8. Retrieval Augmented Generation (RAG)                                                                         | Coming soon |
 | 9. Outer-Loop Agents                                                                                            | Coming soon |
+
+### Table of Contents - workshop: Agents, The Hard Way
+
+| Chapter                                                                                                         | Status      |
+| --------------------------------------------------------------------------------------------------------------- | ----------- |
+| 1. [Calling Model APIs and building CLI chat loops](./01-calling-model-apis-and-building-cli-chat-loops)     | ⚙️ Beta     |
+| 2. [Tool calls and tool-calling loops, local MCP servers](./02-tool-calls-and-tool-calling-loops-local-mcp-servers)                             | ⚙️ Beta     |
+| 3. [Structured outputs as function calls, intro to BAML](./03-structured-outputs-as-function-calls-intro-to-baml)                                                   | 🛠️ Alpha    |
 
 <!-- soon
 - Soon Tell your friends! [social post examples](#social-post-examples)
