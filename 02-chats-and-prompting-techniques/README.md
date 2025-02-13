@@ -424,13 +424,13 @@ messages.append(completion.choices[0].message)
 print('\n-----Assistant-----\n', messages[-1].content)
 ```
 
-⚠ ⚠ ⚠ **NOTE** the use of `gpt-4o` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
+⚠ ⚠ ⚠ **NOTE** the use of `gpt-4` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
 
-#### Exercise
+#### 'Gaslighting'Exercise
 
 Edit the above script to comment out some of the user/assistant exchanges that are used as training examples. How many examples can you comment out before the model reverts to its default behavior?
 
-For example, with only 2 examples in the context window, the model will not use the guidance from the example, and will instead use its internal knowledge from training.
+For example, with only two examples in the context window, the model will not use the guidance from the example and will instead use its internal knowledge from training.
 
 ```python
 obsession = "loaded french fries"
@@ -454,9 +454,9 @@ messages = [
 ]
 ```
 
-### Style Guidance with in-context learning
+### Style Guidance with In-Context Learning
 
-Before, with a single prompt, your user message might look something like:
+In prior exercises with a single prompt, your user message might have looked something like:
 
 ```
 write me a blog post about $TOPIC in the style of $PERSON
@@ -484,13 +484,13 @@ Now, with in-context learning, we can send to the LLM:
 
 ## Assignment
 
-Pick one of your favorite social media or blog content creators, and write a few-shot prompt/script that teaches the LLM to mimic their style, and produces a new post that matches the style.
+Pick one of your favorite social media or blog content creators and write a few-shot prompt/script that teaches the LLM to mimic their style. Aim to produce a new post that matches the style.
 
 ## Next Steps
 
 From here, you're ready to start learning about [Function and Tool Calling](../03-intro-to-tool-calling/README.md).
 
-## Aside - Instruct Tuning and ChatML
+## Aside: Instruct Tuning and ChatML
 
 Understanding the evolution of language models helps in crafting more effective prompts.
 
