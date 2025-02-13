@@ -1,3 +1,8 @@
+.PHONY: format-md
+format-md:
+	@echo "Formatting markdown files..."
+	@npx prettier --write "**/*.md"
+
 .PHONY: test-deps 
 test-deps:
 	pip install pytest-markdown-docs

@@ -8,4 +8,3 @@ If you're looking to contribute, please:
 - if your contribution includes changes to code examples, test it!
 - if your contribution includes net-new content, test it by having another human go through the content!
 - send a pull request
-

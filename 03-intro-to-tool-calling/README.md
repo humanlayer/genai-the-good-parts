@@ -16,11 +16,10 @@ By the end of this chapter, you'll be able to:
 - Sec
 
 ![louis-dupont-tool-calling](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*r8rEqjGZs_e6dibWeaqaQg.png)
-*Image from [Transforming Software Interactions with Tool Calling and LLMs](https://louis-dupont.medium.com/transforming-software-interactions-with-tool-calling-and-llms-dc39185247e9)*
-
+_Image from [Transforming Software Interactions with Tool Calling and LLMs](https://louis-dupont.medium.com/transforming-software-interactions-with-tool-calling-and-llms-dc39185247e9)_
 
 ![function-calling-diagram](https://cdn.openai.com/API/docs/images/function-calling-diagram.png)
-*Image from [OpenAI Function Calling](https://platform.openai.com/docs/guides/gpt/function-calling)*
+_Image from [OpenAI Function Calling](https://platform.openai.com/docs/guides/gpt/function-calling)_
 
 ### Optional Readings
 
@@ -31,7 +30,6 @@ Most of the core concepts in this chapter are well-covered in the following arti
 - [Tool Calling in OpenAI](https://platform.openai.com/docs/guides/gpt/function-calling)
 
 - [Orchestrating Agents](https://cookbook.openai.com/examples/orchestrating_agents)
-
 
 ## Getting Started
 
@@ -45,19 +43,17 @@ export OPENAI_API_KEY="your_api_key_here"
 pip install openai
 ```
 
-
 ## The simplest function calling example
 
-*Code for this section can be found in [solutions/01-first-tool-call.py](solutions/01-first-tool-call.py)*
+_Code for this section can be found in [solutions/01-first-tool-call.py](solutions/01-first-tool-call.py)_
 
 This is heavily adapted from the [OpenAI Function Calling](https://platform.openai.com/docs/guides/gpt/function-calling) documentation, with some slight modifications to match our style.
-
 
 ### Step 1: Create a Function
 
 Let's make a simple function that we want to give our LLM access to. In this case, it will check the estimated delivery date for a package.
 
-```python 
+```python
 from datetime import datetime, timedelta
 from random import randint
 
@@ -65,7 +61,7 @@ def get_estimated_delivery_date(tracking_number: str) -> str:
     """
     get the estimated delivery date for a package
     """
-    # in reality, we'd look up the tracking number in 
+    # in reality, we'd look up the tracking number in
     # a database and get a real estimate, but for now just return a random date
     #
     #   db = sqlite.connect('orders.db')
@@ -77,10 +73,9 @@ def get_estimated_delivery_date(tracking_number: str) -> str:
 
 ### Describing the function to the LLM
 
-Next, we need to tell the LLM that this function is available. To do that, we need to create a description of the function in JSON format. 
+Next, we need to tell the LLM that this function is available. To do that, we need to create a description of the function in JSON format.
 
 In case you are inclined to automate the generation of this json, we'll be doing that below in [Automating function signature](#automating-function-signature).
-
 
 ```python
 openai_functions = [
@@ -301,39 +296,37 @@ You should see the following progression of the conversation thread:
 After the LLM call, you should see this new message:
 
 ```json
-  {
-    "content": null,
-    "role": "assistant",
-    "function_call": null,
-    "tool_calls": [
-      {
-        "id": "call_yICjZtkjSMcbHOKK13A0nEIK",
-        "function": {
-          "arguments": "{\"tracking_number\":\"8675309\"}",
-          "name": "get_estimated_delivery_date"
-        },
-        "type": "function"
-      }
-    ],
-    "refusal": null
-  }
+{
+  "content": null,
+  "role": "assistant",
+  "function_call": null,
+  "tool_calls": [
+    {
+      "id": "call_yICjZtkjSMcbHOKK13A0nEIK",
+      "function": {
+        "arguments": "{\"tracking_number\":\"8675309\"}",
+        "name": "get_estimated_delivery_date"
+      },
+      "type": "function"
+    }
+  ],
+  "refusal": null
+}
 ```
 
 And then after the tool execution, you should see another message appended:
 
 ```json
-  {
-    "role": "tool",
-    "tool_call_id": "call_yICjZtkjSMcbHOKK13A0nEIK",
-    "content": "2024-11-01T13:42:44.266028"
-  }
+{
+  "role": "tool",
+  "tool_call_id": "call_yICjZtkjSMcbHOKK13A0nEIK",
+  "content": "2024-11-01T13:42:44.266028"
+}
 ```
-
 
 ### Sending the whole conversation back to the LLM
 
 Now that we have our tool call response in the thread, we can send the whole conversation back to the LLM so it can use the response from our locally-called `get_estimated_delivery_date` function to answer the user.
-
 
 After processing the tool call, let's send the full chain of messages back to the LLM:
 
@@ -341,13 +334,15 @@ As a reminder, at this point, the message chain is:
 
 ```json
 [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "What is the estimated delivery date for package 8675309?"},
-    {"role": "assistant", "tool_calls": ["..."], "content": null},
-    {"role": "tool", "tool_call_id": "...", "content": "..."}
+  { "role": "system", "content": "You are a helpful assistant." },
+  {
+    "role": "user",
+    "content": "What is the estimated delivery date for package 8675309?"
+  },
+  { "role": "assistant", "tool_calls": ["..."], "content": null },
+  { "role": "tool", "tool_call_id": "...", "content": "..." }
 ]
 ```
-
 
 ```python
 # we just added the tool call response to the end of the chain
@@ -385,13 +380,12 @@ Very cool! Let's go over what just happened.
 5. We append the function result to the conversation
 6. We send the whole conversation back to the LLM, at which point it can construct a response to the user.
 
-
-## Exercise: What happens if we don't provide the tracking number? 
+## Exercise: What happens if we don't provide the tracking number?
 
 Change the user message in [03-sending-results-to-the-llm.py](solutions/03-sending-results-to-the-llm.py) and see what happens if you just ask something like "hey where is my package?" or "hey my hoodie delivery is late!".
 
 What does the LLM respond with? What does it inherently know about the available functions?
- 
+
 What does this tell you about the relationship between function calling and prompting?
 
 Convert the example into a user-llm conversation with `input()` as we did in chapter 2, and explore different conversation strategies. Explore user interface options for displaying to the user that a function is being called during processing.
@@ -470,6 +464,7 @@ get_estimated_delivery_date({
 
 > ^D
 ```
+
 </details>
 
 ## Exercise - handling parallel tool calls
@@ -520,11 +515,12 @@ get_estimated_delivery_date({
 
 "The estimated delivery date for package 8675309 is October 28, 2024, and for package 1234567, it is October 20, 2024."
 ```
+
 </details>
 
 ## Automating function signature
 
-Writing function JSON from scratch is kind of a pain, especially if we're already documenting our funcitons in code using pythons typing and docstring features. 
+Writing function JSON from scratch is kind of a pain, especially if we're already documenting our funcitons in code using pythons typing and docstring features.
 
 From the guide [orchestrating agents](https://cookbook.openai.com/examples/orchestrating_agents#executing_routines), we can steal this block of code to convert our python function into a JSON description automatically:
 
@@ -613,8 +609,6 @@ You should see something familiar:
 
 Code for this example can be found in [solutions/06-generating-schema.py](solutions/06-generating-schema.py)
 
-
-
 ## Exercise - automatically generate the function schema
 
 Rewrite the delivery date script to use this technique to automatically generate the function schema.
@@ -627,25 +621,25 @@ We're very close to developing one of the core concepts in AI agents: the agenti
 
 ## Aside; JSON is all you need
 
-Especially in the early days of tool calling, the use case we explored above was actually *not* the most common.
+Especially in the early days of tool calling, the use case we explored above was actually _not_ the most common.
 
 Yes, tool calling is a way for LLMs to interact with traditional deterministic software, but more generally, the thing that makes tool calling special is that it allows you to give the LLM access to any function that you can describe in JSON.
 
-Essentially, what folks quickly realized is that they could use tool calling to get the LLM to generate *any* json payload, not just a json payload that indicates a function call. That means you could use tool calling to get an LLM to turn unstructured text into structured json.
+Essentially, what folks quickly realized is that they could use tool calling to get the LLM to generate _any_ json payload, not just a json payload that indicates a function call. That means you could use tool calling to get an LLM to turn unstructured text into structured json.
 
-In our work, we translated things like "what's the status of order 1234567890?" into 
+In our work, we translated things like "what's the status of order 1234567890?" into
 
 ```json
 {
-    "tool_calls": [
-        {
-            "id": "call_1234567890",
-            "function": {
-                "name": "get_order_status",
-                "arguments": "{\"order_id\": \"1234567890\"}"
-            }
-        }
-    ]
+  "tool_calls": [
+    {
+      "id": "call_1234567890",
+      "function": {
+        "name": "get_order_status",
+        "arguments": "{\"order_id\": \"1234567890\"}"
+      }
+    }
+  ]
 }
 ```
 
@@ -653,9 +647,9 @@ but we could just have easily have had the model return something like
 
 ```json
 {
-    "order_status_request": {
-        "order_id": "1234567890"
-    }
+  "order_status_request": {
+    "order_id": "1234567890"
+  }
 }
 ```
 
@@ -671,8 +665,8 @@ into
 
 ```json
 {
-    "has_buying_intent": true,
-    "category": "clothing"
+  "has_buying_intent": true,
+  "category": "clothing"
 }
 ```
 

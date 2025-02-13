@@ -2,7 +2,6 @@
 
 **Status**: 💭 Outline
 
-
 ## Compound tool calls and the agentic loop
 
 That's great if we know our tracking info, but what if the user just says the item name?
@@ -13,7 +12,7 @@ def search_orders(user_email: str, item_name: str) -> str:
 ```
 
 IN this case, let's embed the user email in the system prompt, since
-that wont change throughout the interaction. 
+that wont change throughout the interaction.
 
 ```python
 system_prompt = """
@@ -25,9 +24,7 @@ the user your are assisting is: tom@acme-industries.com
 """
 ```
 
-
 ## Aside and further reading
-
 
 **Going deeper:**
 
