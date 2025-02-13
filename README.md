@@ -24,19 +24,19 @@ They will also be posted to https://genaibook.substack.com/. Feel free to drop a
 
 ### Table of Contents
 
-| Chapter | Status |
-|---------|--------|
-| 1. [Interacting with Language Models Programatically](.01-interacting-with-language-models-programatically) | ⚙️ Beta |
-| 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques) | ⚙️ Beta |
-| 3. [Introduction to Tool Calling](./03-intro-to-tool-calling) | 🛠️ Alpha |
-| 4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratc) | 💭 Outline |
-| 5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity) | 💭 Outline |
-| 6. Multi-Agent Architectures | Coming soon |
-| 7. Chain of Thought and other Intermediate Prompt Engineering Techniques | Coming soon |
-| 8. Retrieval Augmented Generation (RAG) | Coming soon |
-| 9. Outer-Loop Agents | Coming soon |
+| Chapter                                                                                                         | Status      |
+| --------------------------------------------------------------------------------------------------------------- | ----------- |
+| 1. [Interacting with Language Models Programatically](.01-interacting-with-language-models-programatically)     | ⚙️ Beta     |
+| 2. [AI Messaging and Basic Prompt Engineering](./02-chats-and-prompting-techniques)                             | ⚙️ Beta     |
+| 3. [Introduction to Tool Calling](./03-intro-to-tool-calling)                                                   | 🛠️ Alpha    |
+| 4. [Building an Agentic Tool-Calling Loop from Scratch](./04-building-an-agentic-tool-calling-loop-from-scratc) | 💭 Outline  |
+| 5. [Tool Calling Techniques for Security and Clarity](./05-tool-calling-techniques-for-security-and-clarity)    | 💭 Outline  |
+| 6. Multi-Agent Architectures                                                                                    | Coming soon |
+| 7. Chain of Thought and other Intermediate Prompt Engineering Techniques                                        | Coming soon |
+| 8. Retrieval Augmented Generation (RAG)                                                                         | Coming soon |
+| 9. Outer-Loop Agents                                                                                            | Coming soon |
 
-<!-- soon 
+<!-- soon
 - Soon Tell your friends! [social post examples](#social-post-examples)
 
 

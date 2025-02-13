@@ -10,7 +10,6 @@ We'll use this to take advantage of specific model tuning to improve the quality
 
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=49dbd6cd-b2e1-452b-8040-44afcef4e21f" />
 
-
 ## Getting Started
 
 We'll assume you're picking up where you left off, but make sure you've got OpenAI ready to go:
@@ -22,7 +21,6 @@ export OPENAI_API_KEY="your_api_key_here"
 ```bash
 pip install openai
 ```
-
 
 ## The core of the OpenAI message format
 
@@ -120,7 +118,6 @@ def print_messages(messages):
 print_messages(messages)
 ```
 
-
 Your output will now look like
 
 ```json
@@ -145,14 +142,11 @@ Your output will now look like
 
 You may be starting to see how this might map onto a chatgpt-style interface, where we can execute a running conversation with the model.
 
-
 #### OpenAI vs. other model providers
 
 While this example is specific to OpenAI, most model providers have a matching or very similar interface. If you understand how OpenAI handles messages, you'll have enough to apply the techniques in this chapter with other providers.
 
-
 For more detail on the OpenAI chat message format, check out some of the links under [Aside - Instruct Tuning and PromptML](#aside---instruct-tuning-and-promptml).
-
 
 ## Multi-Message conversations
 
@@ -254,7 +248,6 @@ You've probably heard plenty about "context window" when reading about how to us
 
 Next, let's use what we learned to build a simple chatbot using `input()` for user interaction. We'll keep the same "write a haiku" prompt, and then prompt the user for input, appending to the conversation chain each time.
 
-
 ```python notest
 import json
 from openai import OpenAI
@@ -311,7 +304,6 @@ while True:
 
 There are far more sophisticated ways to interact with users, and you'll see some of them in later chapters. For now, `input()` is enough to get the job done. Note that `input()` only allows for single line input, and may have different behavior depending on your system/terminal.
 
-
 #### Exercise - remove the opening prompt
 
 Create a generic ChatGPT-style system that starts by waiting for a user message, then enters the chat loop. That is, remove the "write me a haiku" interaction at the beginning of the script.
@@ -327,7 +319,6 @@ In every case here, we've been exchanging a single message with the LLM, and hav
 But here's a trick that AI engineers have been using since the early days of GPT-3: **messages with the `assistant` role do not need to be llm generated!**. That is, you, the API client, can tell the model "here's how you respond to a given user message", and the model will learn to follow that instruction.
 
 This is the key of "Few-Shot In-Context Learning", your first step into intermediate-level prompt engineering.
-
 
 Let's give it a shot by asking the model it's name (it will refuse), and then using few-shot prompting to get it to think it has a name.
 
@@ -354,38 +345,38 @@ You will see something like:
 ```
 -----Assistant-----
  I don't have a personal name, but you can call me Assistant. How can I help you today?
- ```
+```
 
- Now, you could of course tweak the prompt to add extra context, for example:
+Now, you could of course tweak the prompt to add extra context, for example:
 
 [07b-whats-your-name-prompt.py](./solutions/07b-whats-your-name-prompt.py)
- ```python
+
+```python
 from openai import OpenAI
 
 client = OpenAI()
 
 # start with a system message
 messages = [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Your name is Philbert. What is your name?"}
+   {"role": "system", "content": "You are a helpful assistant."},
+   {"role": "user", "content": "Your name is Philbert. What is your name?"}
 ]
 
 completion = client.chat.completions.create(
-    model="gpt-4",
-    messages=messages,
+   model="gpt-4",
+   messages=messages,
 )
 
 messages.append(completion.choices[0].message)
 
 print('\n-----Assistant-----\n', messages[-1].content)
 
- ```
+```
 
-
- ```
+```
 -----Assistant-----
- My name is Philbert. How can I assist you today?
- ```
+My name is Philbert. How can I assist you today?
+```
 
 This works, but it still falls in the category of "zero-shot prompting". We're asking the model to infer the name directly from the prompt.
 
@@ -394,7 +385,6 @@ This works, but it still falls in the category of "zero-shot prompting". We're a
 Let's try a different approach, and we'll see where the power is here in a minute.
 
 [08-whats-your-name-few-shot.py](./solutions/08-whats-your-name-few-shot.py)
-
 
 ```python
 from openai import OpenAI
@@ -431,7 +421,7 @@ messages.append(completion.choices[0].message)
 print('\n-----Assistant-----\n', messages[-1].content)
 ```
 
-⚠ ⚠ ⚠  **NOTE** the use of `gpt-4` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
+⚠ ⚠ ⚠ **NOTE** the use of `gpt-4` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
 
 #### Exercise
 
@@ -468,9 +458,9 @@ Before, with a single prompt, your user message might look something like:
 ```
 write me a blog post about $TOPIC in the style of $PERSON
 
-here's some of $PERSON's example work: 
+here's some of $PERSON's example work:
 
-$POST1 
+$POST1
 
 $POST2
 
@@ -499,15 +489,17 @@ From here, you're ready to start learning about [Function and Tool Calling](../0
 
 ## Aside - Instruct Tuning and ChatML
 
-Understanding the evolution of language models helps in crafting more effective prompts. 
+Understanding the evolution of language models helps in crafting more effective prompts.
 
 ### Early vs. Instruct-Tuned Models
+
 - Early models: Designed for simple text completion, requiring creative prompting for specific tasks.
 - Instruct-tuned models (circa 2021-2022): Fine-tuned to understand and follow explicit instructions.
 
 See [Chapter-XX Taking the Rails off: Raw Completions APIs](../xx-taking-the-rails-off/README.md) for a deep dive into non-chat interfaces to LLMs.
 
 ### Instruct Tuning Mechanics
+
 - Uses special tokens to delineate parts of the input (instruction, context, output format).
 - Example:
   ```
@@ -517,6 +509,7 @@ See [Chapter-XX Taking the Rails off: Raw Completions APIs](../xx-taking-the-rai
   ```
 
 ### ChatML
+
 - [ChatML](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chat-markup-language) is a markup language for structuring prompts, aligning with instruct-tuned models' processing.
 - More concise than JSON-based formats, but essentially represents the same thing.
 - Example:

@@ -1,13 +1,12 @@
 # Interacting with Language Models Programatically
 
-⚙️  Status: Beta
+⚙️ Status: Beta
 
 ## Overview
 
 In this chapter, we'll explore how to interact with language models programmatically using a Python client. This will lay the foundation for the rest of the GenAI engineering topics in the book.
 
-<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=eb785991-1b9b-4eb4-adcd-c92c6ecd0c34" /> 
-
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=eb785991-1b9b-4eb4-adcd-c92c6ecd0c34" />
 
 ## Getting Started
 
@@ -15,7 +14,7 @@ We'll start by doing a hello world example with OpenAI. This will match the exam
 
 #### Why OpenAI?
 
-I've chosen OpenAI because it's one of the most popular model providers and I have the most experience with it. 
+I've chosen OpenAI because it's one of the most popular model providers and I have the most experience with it.
 
 While every chapter will include code that works with OpenAI, each chaper will also include a code example that works with a different model, like mistral, anthropic, groq, or even a locally running OSS model.
 
@@ -30,7 +29,6 @@ export OPENAI_API_KEY="your_api_key_here"
 ```
 
 ### Install the OpenAI Python Client
-
 
 ```bash
 pip install openai
@@ -75,8 +73,8 @@ python openai_hello_world.py
 You should see a haiku output, for example:
 
 ```text
-Functions call themselves,  
-Layers of logic unfold,  
+Functions call themselves,
+Layers of logic unfold,
 Endless paths to home.
 ```
 
@@ -86,7 +84,7 @@ Congrats, you can now drive OpenAI models from within scripts and applications.
 
 That's all nice, but if you're using and building AI applications, there's a chance you've seen and / or will want to implement streaming responses.
 
-Let's update the script to stream the response. Notice we changed to prompt to ask for a sonnet, just so there's a little more output to see. 
+Let's update the script to stream the response. Notice we changed to prompt to ask for a sonnet, just so there's a little more output to see.
 
 ```python
 from openai import OpenAI
@@ -144,7 +142,7 @@ if __name__ == "__main__":
 
 ### Exercise
 
-The above example doesn't stream output to the console, rather, it waits for the entire response to be generated before printing. Build any run an asyncio-compatible version of the [streaming example](#streaming-responses). 
+The above example doesn't stream output to the console, rather, it waits for the entire response to be generated before printing. Build any run an asyncio-compatible version of the [streaming example](#streaming-responses).
 
 <details>
 <summary>Hint</summary>
@@ -158,7 +156,7 @@ As with the other examples, there's a runnable version in the `solutions` direct
 
 ## Side quest - Using Anthropic instead of OpenAI
 
-As promised, we'll incoroporate other models and LLM providers throughout the book. 
+As promised, we'll incoroporate other models and LLM providers throughout the book.
 
 ## Setup Anthropic
 
@@ -198,7 +196,7 @@ Update the anthropic example to either 1) stream tokens or 2) make an asyncio-co
 
 ## Assignment - Chaining LLM calls
 
-Write a python program that uses two separate LLM calls. Generate a short haiku as before, then pass the output to another `chat.completions.create` call, asking the model to evaluate the haiku with some constructive criticism. Print both the haiku and the evaluation. 
+Write a python program that uses two separate LLM calls. Generate a short haiku as before, then pass the output to another `chat.completions.create` call, asking the model to evaluate the haiku with some constructive criticism. Print both the haiku and the evaluation.
 
 You can use OpenAI, Anthropic, or mix the two. See how the results change when you swap the author/reviewer models!
 
@@ -239,7 +237,3 @@ Overall, the haiku is a solid attempt to capture the essence of recursion in a p
 ## Next Steps
 
 Next, head over to **(Coming Soon)** Chapter 2: Prompt Engineering Basics
-
-
-
-
