@@ -5,7 +5,7 @@ client = AsyncOpenAI()
 
 async def main():
     response = await client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {

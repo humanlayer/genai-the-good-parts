@@ -1,28 +1,28 @@
 # Interacting with Language Models Programatically
 
-⚙️ Status: Beta
+`⚙️ Status: Beta`
 
 ## Overview
 
-In this chapter, we'll explore how to interact with language models programmatically using a Python client. This will lay the foundation for the rest of the GenAI engineering topics in the book.
+In this chapter, we'll explore how to interact with language models programmatically using a Python client. This will lay the foundation for the rest of the GenAI engineering topics in this book.
 
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=eb785991-1b9b-4eb4-adcd-c92c6ecd0c34" />
 
 ## Getting Started
 
-We'll start by doing a hello world example with OpenAI. This will match the example in [OpenAI's Documentation](https://platform.openai.com/docs/quickstart).
+We'll start by doing a "hello world" example with OpenAI. This will match the example in [OpenAI's Documentation](https://platform.openai.com/docs/quickstart).
 
 #### Why OpenAI?
 
-I've chosen OpenAI because it's one of the most popular model providers and I have the most experience with it.
+OpenAI's platform has been chosen for this book because it's one of the most popular model providers and has extensive documentation and community support.
 
-While every chapter will include code that works with OpenAI, each chaper will also include a code example that works with a different model, like mistral, anthropic, groq, or even a locally running OSS model.
+While each chapter primarily uses OpenAI examples, you'll also find code examples using alternative providers such as Mistral, Anthropic, xAI, and locally-hosted open source models.
 
 ### Create an OpenAI API Key
 
 You'll need to create an OpenAI API Key and sign up for some credits. A few dollars (say, $5) should be enough to run every example in this book. There are various programs that will provide you with some free credits if you can find one.
 
-In a shell, the `OPENAI_API_KEY` environment variable to your API key.
+In a shell, set the `OPENAI_API_KEY` environment variable to your API key.
 
 ```bash
 export OPENAI_API_KEY="your_api_key_here"
@@ -34,7 +34,7 @@ export OPENAI_API_KEY="your_api_key_here"
 pip install openai
 ```
 
-If you want to use a virtual environment, now is the time to make one. If you don't know what that is, you can probably ignore for now
+If you want to use a virtual environment, now is the time to make one. If you don't know what that is, you can probably ignore the below steps for now (Be sure to create a folder to operate in, then run the following commands):
 
 ```bash
 python3 -m venv .venv
@@ -42,7 +42,15 @@ source .venv/bin/activate
 pip install openai
 ```
 
-## Making your First Request
+Or, for you `uv` folks:
+
+```bash
+uv init
+uv add openai
+# (Moving forward requests to run `python $YOUR_PYTHON_FILE.py` can be executed with `uv run $YOUR_PYTHON_FILE.py`).
+```
+
+## Making Your First Request
 
 Create a new file called `openai_hello_world.py` and add the following code:
 
@@ -82,7 +90,7 @@ Congrats, you can now drive OpenAI models from within scripts and applications.
 
 ## Streaming Responses
 
-That's all nice, but if you're using and building AI applications, there's a chance you've seen and / or will want to implement streaming responses.
+That's all nice, but if you're using and building AI applications, there's a chance you've seen and/or will want to implement streaming responses.
 
 Let's update the script to stream the response. Notice we changed to prompt to ask for a sonnet, just so there's a little more output to see.
 
@@ -111,8 +119,7 @@ When running this, you should see the output appear progressively, a few tokens 
 
 ## AsyncIO Support
 
-If you're doing modern python with tools like `fastapi` or `hypercorn`, you'll likely need to do these things
-in an asyncio-friendly way.
+If you're doing modern python with tools like FastAPI or Hypercorn and have specific performance requirements, you may need to do things in an `asyncio`-friendly way.
 
 Create a new file (or update the existing one) add the following code:
 
@@ -124,7 +131,7 @@ client = AsyncOpenAI()
 
 async def main():
     response = await client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {
@@ -142,7 +149,7 @@ if __name__ == "__main__":
 
 ### Exercise
 
-The above example doesn't stream output to the console, rather, it waits for the entire response to be generated before printing. Build any run an asyncio-compatible version of the [streaming example](#streaming-responses).
+The above example doesn't stream output to the console, rather, it waits for the entire response to be generated before printing. Build and run an asyncio-compatible version of the [streaming example](#streaming-responses).
 
 <details>
 <summary>Hint</summary>
@@ -150,11 +157,11 @@ The above example doesn't stream output to the console, rather, it waits for the
 If you're not an expert with asyncio (I'm certainly not), search around for an example. You'll need constructs like  
 `async for`.
 
-As with the other examples, there's a runnable version in the `solutions` directory.
+As with the other examples, there's a runnable version in the [solutions/03_openai_async.py](./solutions/03_openai_async.py) file.
 
 </details>
 
-## Side quest - Using Anthropic instead of OpenAI
+## Side Quest: Use Anthropic Instead of OpenAI
 
 As promised, we'll incoroporate other models and LLM providers throughout the book.
 
@@ -168,6 +175,12 @@ export ANTHROPIC_API_KEY="your_api_key_here"
 
 ```bash
 pip install anthropic
+```
+
+and again for `uv` folks:
+
+```bash
+uv add anthropic
 ```
 
 ### Making a request
@@ -236,4 +249,4 @@ Overall, the haiku is a solid attempt to capture the essence of recursion in a p
 
 ## Next Steps
 
-Next, head over to **(Coming Soon)** Chapter 2: Prompt Engineering Basics
+Next, head over to [Chapter 2: AI Messaging and Basic Prompt Engineering](../02-chats-and-prompting-techniques)
