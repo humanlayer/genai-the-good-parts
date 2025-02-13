@@ -1,4 +1,4 @@
-**GenAI, the good Parts**: A set of AI tutorials for engineers in a hurry. Designed to cut through the hype / frameworks and focus on the core use cases.
+**GenAI, The Good Parts**: A set of AI tutorials for engineers in a hurry. Designed to cut through the hype/frameworks and focus on core use cases.
 
 <div align="center">
 
@@ -14,7 +14,7 @@
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY%20NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=350f9de1-483c-42ff-a8a8-f5214429c140" />
 
-<h4>The no hype no bs guide to doing dope shit with AI</h4>
+<h4>The no hype, no BS guide to doing dope shit with AI.</h4>
 
 </div>
 
