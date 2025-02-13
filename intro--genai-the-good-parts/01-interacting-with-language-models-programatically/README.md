@@ -1,6 +1,8 @@
-# Interacting with Language Models Programatically
+---
+status: beta
+---
 
-`⚙️ Status: Beta`
+# Interacting with Language Models Programatically
 
 ## Overview
 

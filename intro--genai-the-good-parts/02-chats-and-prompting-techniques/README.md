@@ -1,6 +1,8 @@
-# Chat Interfaces and Few-Shot Prompting
+---
+status: alpha
+---
 
-🛠️ Status: Alpha
+# Chat Interfaces and Few-Shot Prompting
 
 ## Overview
 
@@ -11,8 +13,6 @@ We'll use this to take advantage of specific model-tuning to improve the quality
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=49dbd6cd-b2e1-452b-8040-44afcef4e21f" />
 
 ## Getting Started
-
-We'll assume you're picking up where you left off, but make sure you've got OpenAI ready to go:
 
 We'll assume you're picking up where we left off. Make sure you've [setup an OpenAI-ready project like we did in Chapter 1](../01-interacting-with-language-models-programatically#create-an-openai-api-key).
 
