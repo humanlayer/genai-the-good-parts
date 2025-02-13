@@ -1,12 +1,12 @@
-# Chat interfaces and Few-Shot Prompting
+# Chat Interfaces and Few-Shot Prompting
 
 🛠️ Status: Alpha
 
 ## Overview
 
-In this chapter, we'll go deeper on the structure of how LLM APIs process messages and longer chats.
+In this chapter, we'll go deeper into the structure of how LLM APIs process messages and longer chats.
 
-We'll use this to take advantage of specific model tuning to improve the quality and accuracy of responses, using the "Few-Shot In-Context Learning" approach (sometimes just "Few-Shot Prompting").
+We'll use this to take advantage of specific model-tuning to improve the quality and accuracy of responses, using the "Few-Shot In-Context Learning" approach (sometimes just "Few-Shot Prompting").
 
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=49dbd6cd-b2e1-452b-8040-44afcef4e21f" />
 
@@ -14,23 +14,17 @@ We'll use this to take advantage of specific model tuning to improve the quality
 
 We'll assume you're picking up where you left off, but make sure you've got OpenAI ready to go:
 
-```bash
-export OPENAI_API_KEY="your_api_key_here"
-```
-
-```bash
-pip install openai
-```
+We'll assume you're picking up where we left off. Make sure you've [setup an OpenAI-ready project like we did in Chapter 1](../01-interacting-with-language-models-programatically#create-an-openai-api-key).
 
 ## The core of the OpenAI message format
 
-In the past, we just sent a string to the LLM and got a response. We didn't look very closely at the structure of the messages.
+In the prior chapter, we sent a string to the LLM and got a response. But we didn't look very closely at the structure of the messages. Let's do that now.
 
-To start, let's look at the input to the LLM we've used in the past, messages with a `role` and `content`:
+To start, let's look at the input to the LLM we've used in the past, specifically messages with a `role` and `content`:
 
 ```python notest
 completion = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What's the capital of France?"}
@@ -46,8 +40,6 @@ We'll see that the response from the LLM looks similar, let's run our script and
 from openai import OpenAI
 client = OpenAI()
 
-
-
 completion = client.chat.completions.create(
     model="gpt-4o",
     messages=[
@@ -62,7 +54,7 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message.model_dump_json(indent=2))
 ```
 
-We'll see a similar looking output, with a role of `assistant`.
+You'll notice the output contains a similar object within its `choices` payload, this time with the role of `assistant`.
 
 ```json
 {
@@ -76,13 +68,13 @@ We'll see a similar looking output, with a role of `assistant`.
 
 #### Exercise
 
-Update the script above to print the entire completion object in JSON format, and look at the other fields. Use this to answer the question: How many tokens did your request use?
+Update the script above to print the entire `completion` object in JSON format and inspect the other fields. Use this to answer the question: How many tokens did your request use?
 
 [02-exercise-count-tokens.py](./solutions/02-exercise-count-tokens.py)
 
 ### Appending messages to the history
 
-Let's adapt our script to store the messages in a list and append to them each time we get a response.
+Let's adapt our script to store messages in a list and append to them each time we get a response.
 
 [03-message-chains.py](./solutions/03-message-chains.py)
 
@@ -104,7 +96,7 @@ messages.append({
 })
 
 completion = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     messages=messages,
 )
 
@@ -140,19 +132,19 @@ Your output will now look like
 ]
 ```
 
-You may be starting to see how this might map onto a chatgpt-style interface, where we can execute a running conversation with the model.
+By combining the original messages with OpenAI's response, we now have the basic building blocks necessary to create a ChatGPT-style interface: A back-and-forth conversation between a user and model.
 
-#### OpenAI vs. other model providers
+#### OpenAI vs. Other Model Providers
 
-While this example is specific to OpenAI, most model providers have a matching or very similar interface. If you understand how OpenAI handles messages, you'll have enough to apply the techniques in this chapter with other providers.
+While this example is specific to OpenAI, most model providers have a matching or similar interface. If you understand how OpenAI handles messages, you'll have enough to apply the techniques in this chapter to other providers.
 
 For more detail on the OpenAI chat message format, check out some of the links under [Aside - Instruct Tuning and PromptML](#aside---instruct-tuning-and-promptml).
 
-## Multi-Message conversations
+## Multi-Message Conversations
 
-Up to this point, we've been looking at single-message conversations. A user asks a question, the model responds, and we print the answer.
+Up to this point we've been looking at single-message conversations: A user asks a question, the model responds, and we print the answer.
 
-Let's update our previous script to append a user messages after the first response, that will reference prior content in the conversation. In this case, we'll ask the LLM to review it's own haiku, and provide some constructive criticism.
+Let's update our previous script to append user messages after the initial response that will reference prior content in the conversation. In this case, we'll ask the LLM to review its own haiku and provide some constructive criticism.
 
 [04-appending-messages.py](./solutions/04-appending-messages.py)
 
@@ -249,7 +241,6 @@ You've probably heard plenty about "context window" when reading about how to us
 Next, let's use what we learned to build a simple chatbot using `input()` for user interaction. We'll keep the same "write a haiku" prompt, and then prompt the user for input, appending to the conversation chain each time.
 
 ```python notest
-import json
 from openai import OpenAI
 
 client = OpenAI()
@@ -266,7 +257,7 @@ messages.append({
 })
 
 completion = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     messages=messages,
 )
 
@@ -275,8 +266,12 @@ messages.append(completion.choices[0].message)
 print('-----Assistant-----\n', messages[-1].content)
 
 while True:
-    print("\n------User------\n")
+    print("\n------User------")
+    print("\033[2mType a response to the assistant and press 'enter'\033[0m")
+    print("\033[2mctrl-d to exit\033[0m\n")
+
     try:
+        print("> ", end="")
         user_input = input()
     except EOFError: # allow the user to exit with ctrl-d
         print("\n------EOF------\n")
@@ -290,23 +285,22 @@ while True:
     })
 
     completion = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=messages,
     )
 
     messages.append(completion.choices[0].message)
 
     print('\n-----Assistant-----\n', messages[-1].content)
-
 ```
 
-#### Aside - limitations of `input()`
+#### Aside: Limitations of `input()`
 
-There are far more sophisticated ways to interact with users, and you'll see some of them in later chapters. For now, `input()` is enough to get the job done. Note that `input()` only allows for single line input, and may have different behavior depending on your system/terminal.
+There are far more sophisticated ways to interact with users, and you'll see some of them in later chapters. For now `input()` is enough to get the job done. Note that `input()` only allows for single line input and may have different behavior depending on your system/terminal.
 
-#### Exercise - remove the opening prompt
+#### Exercise: Remove the Opening Prompt
 
-Create a generic ChatGPT-style system that starts by waiting for a user message, then enters the chat loop. That is, remove the "write me a haiku" interaction at the beginning of the script.
+Create a generic ChatGPT-style system that starts by waiting for a user message, then enters the chat loop. That is, remove the "write me a haiku" interaction at the beginning of the script and start with a blank conversation history that builds first on user input.
 
 [06-exercise-chatbot.py](./solutions/06-exercise-chatbot.py)
 
@@ -320,11 +314,11 @@ But here's a trick that AI engineers have been using since the early days of GPT
 
 This is the key of "Few-Shot In-Context Learning", your first step into intermediate-level prompt engineering.
 
-Let's give it a shot by asking the model it's name (it will refuse), and then using few-shot prompting to get it to think it has a name.
+Let's give it a shot by asking the model its name (it will refuse), and then using few-shot prompting to get it to think it has a name.
 
 ### What is your name?
 
-To start, let's ask the model it's name:
+To start, let's ask the model its name:
 
 [07-whats-your-name.py](./solutions/07-whats-your-name.py)
 
@@ -338,6 +332,15 @@ messages = [
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "What is your name?"}
 ]
+
+completion = client.chat.completions.create(
+    model="gpt-4o",
+    messages=messages,
+)
+
+messages.append(completion.choices[0].message)
+
+print('\n-----Assistant-----\n', messages[-1].content)
 ```
 
 You will see something like:
@@ -363,7 +366,7 @@ messages = [
 ]
 
 completion = client.chat.completions.create(
-   model="gpt-4",
+   model="gpt-4o",
    messages=messages,
 )
 
@@ -380,9 +383,9 @@ My name is Philbert. How can I assist you today?
 
 This works, but it still falls in the category of "zero-shot prompting". We're asking the model to infer the name directly from the prompt.
 
-### What is your name, with in-context learning.
+### "What is your name?", with in-context learning.
 
-Let's try a different approach, and we'll see where the power is here in a minute.
+Let's try a different approach and we'll see where the power is here in a minute.
 
 [08-whats-your-name-few-shot.py](./solutions/08-whats-your-name-few-shot.py)
 
@@ -423,11 +426,11 @@ print('\n-----Assistant-----\n', messages[-1].content)
 
 ⚠ ⚠ ⚠ **NOTE** the use of `gpt-4` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
 
-#### Exercise
+#### Exercise: Gaslighting the model
 
 Edit the above script to comment out some of the user/assistant exchanges that are used as training examples. How many examples can you comment out before the model reverts to its default behavior?
 
-For example, with only 2 examples in the context window, the model will not use the guidance from the example, and will instead use its internal knowledge from training.
+For example, with only two examples in the context window, the model will not use the guidance from the example and will instead use its internal knowledge from training.
 
 ```python
 obsession = "loaded french fries"
@@ -451,9 +454,9 @@ messages = [
 ]
 ```
 
-### Style Guidance with in-context learning
+### Style Guidance with In-Context Learning
 
-Before, with a single prompt, your user message might look something like:
+In prior exercises with a single prompt, your user message might have looked something like:
 
 ```
 write me a blog post about $TOPIC in the style of $PERSON
@@ -481,13 +484,13 @@ Now, with in-context learning, we can send to the LLM:
 
 ## Assignment
 
-Pick one of your favorite social media or blog content creators, and write a few-shot prompt/script that teaches the LLM to mimic their style, and produces a new post that matches the style.
+Pick one of your favorite social media or blog content creators and write a few-shot prompt/script that teaches the LLM to mimic their style. Aim to produce a new post that matches the style.
 
 ## Next Steps
 
 From here, you're ready to start learning about [Function and Tool Calling](../03-intro-to-tool-calling/README.md).
 
-## Aside - Instruct Tuning and ChatML
+## Aside: Instruct Tuning and ChatML
 
 Understanding the evolution of language models helps in crafting more effective prompts.
 
