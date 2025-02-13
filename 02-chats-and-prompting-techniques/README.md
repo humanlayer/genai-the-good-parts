@@ -426,7 +426,7 @@ print('\n-----Assistant-----\n', messages[-1].content)
 
 ⚠ ⚠ ⚠ **NOTE** the use of `gpt-4` in this example. models like `gpt-4o` and `gpt-4o-mini` do not take as much context from previous user/assistant messages, preferring instead to learn only from the system prompt.
 
-#### 'Gaslighting'Exercise
+#### Exercise: Gaslighting the model
 
 Edit the above script to comment out some of the user/assistant exchanges that are used as training examples. How many examples can you comment out before the model reverts to its default behavior?
 
